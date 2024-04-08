@@ -1,0 +1,55 @@
+Prac 4
+
+go to omnet folder>mingew>type command "omnetpp"
+
+omnetpp simulation opened
+
+go to file in taskbar> import > general > existing project workspace >
+ browse directory > select root directory > go to folder inet3.7/inet
+
+right click inet folder in project explorer > build project > inet/examples/adhoc > right click > new folder = Simple Adhoc
+right click Simple Adhoc folder > New > Network Description File(NED) > Name="net1.ned" > Generated wizards > new adhoc mobility wireless network wizard > finish
+
+click on Net1.ned > go to source > remove the import library which having cross symbol
+
+go to design > go to palette > drag and drop AdhocHost(mobile symbol) > then drag and drop IPv4 configuration > drag and drop IEEE 80211 Scalar Radio Medium > Delect the AdhocHost(mobile symbol), IPv4 configuration and IEEE 80211 Scalar Radio Medium
+
+go to ieee80211 > net80211.ned > copy the code:
+radioMedium:Ieee8021ScalarRadioMedium {
+ parameters:
+     	@display("p=100,250")
+} > and place it in simpleadhoc Net1.ned code where the ScalarRadioMedium by replacing it.
+
+SimpleAdhoc folder > omnetpp.ini > click on run as omnet++ simulation
+
+It will open a new window> Click on Run button
+
+
+
+
+
+Prac 7
+
+go to omnet folder>mingew>type command "omnetpp"
+
+omnetpp simulation opened
+
+go to file in taskbar> import > general > existing project workspace >
+ browse directory > select root directory > go to folder inet3.7/inet
+
+right click inet folder in project explorer > build project > inet/examples/adhoc > right click > new folder = Simple Adhoc
+right click Simple Adhoc folder > New > Network Description File(NED) > Name="net1.ned" > Generated wizards > new adhoc mobility wireless network wizard > finish
+
+click on Net1.ned > go to source > remove the import library which having cross symbol
+
+go to design > go to palette > drag and drop Wireless AdhocHost(laptop symbol) > then drag and drop Wireless Router > then drag and drop IPv4 configuration > drag and drop IEEE 80211 Scalar Radio Medium > Delect the Wireless AdhocHost(laptop symbol), Wireless Router IPv4 configuration and IEEE 80211 Scalar Radio Medium
+
+go to ieee80211 > net80211.ned > copy the code:
+radioMedium:Ieee8021ScalarRadioMedium {
+ parameters:
+     	@display("p=100,250")
+} > and place it in simpleadhoc Net1.ned code where the ScalarRadioMedium by replacing it.
+
+SimpleAdhoc folder > omnetpp.ini > click on run as omnet++ simulation
+
+It will open a new window> Click on Run button
