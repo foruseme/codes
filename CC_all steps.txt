@@ -1,0 +1,190 @@
+###################FOSS CLOUD
+-Open FOSS Cloud in Mozilla by using the ip address 192.168.10.3, Then input username and password as admin
+-open WinSCP and put credential host name: 192.168.10.3, user name:root and password: admin
+-in left hand side, try to navigate to the folder path where you kept your Ubuntu iso file.
+-Then in the right hand side, navigate to var>virtualization>iso-choosable, drag and drop the iso file from left to right.
+-go to the foss cloud and navigate to VM>profile>create. Then create a Linux profile named linux_90.	{multi}
+-go to the VMtemplates>create and you will see your linux file select that. Thenselect vmpool set no. of display as 1 and create vm template.
+-Then start the Linux vm by clicking on -> button. After that click vm box button.
+The Ubuntu vm will be opened
+Then set the iso file to hardware by clicking on cd button.
+
+
+#######################OwnCloud
+-Open owncloud with the ip address 192.168.9.241. Click on the System and domain settings.
+-Login-- username: Administrator and password:admin@123
+-Click on users option ---Then click user in below box
+-Click on add ---then add a user, by inputting your personalized details username and password
+-After that logout as admin, and click on owncloud in applications section
+-Then input username and password that you have created and login
+
+
+
+##########################Linux VM creation
+-Click on create instance button
+-Change the instanc name according to you--bootdisk {ubuntu as os} ---allow http traffic---create
+-click on SSH ---upload pdf
+-type "ls" command to check
+
+
+
+
+
+###########################WINDOWS VM creation  
+“Hello world “ website on IIS-Create an IIS web server VM using Compute Engine
+
+
+-Click on create instance button
+-Change the instanc name according to you--bootdisk {windows server as os} ---allow http traffic--create
+-download RDP file
+-click on RDP set windows password {save that password and paste it}
+-enter credentials and click on YES
+-select "add roles and features" from manage tab
+-keep clicking on NEXT and select "web server(IIS)---- install
+-create helloworld txt file named as "index.html" save it to documents
+	<!DOCTYPE html>
+	<html>
+	<head>
+	</head>
+	<body>
+			<h1>hello world</h1>
+	</body>
+	</html>
+
+
+-move index.html to "" c:/inetpub/wwwroot/folder""
+-now go to tools-- select IIS manager
+-select default website then move index.html to top
+-now go to your pc and types external IP 
+
+
+
+
+#########################hello world website on apache and create apache webserver on linux
+VM
+
+-Click on create instance button
+-Change the instanc name according to you--allow http traffic--create
+-click on "open in browser window"----u will get SSH cmd
+-command:: 
+>>sudo apt update && sudo apt –y install apache2  {To install apache}
+>>sudo systemctl status apache2 {start apache}
+>>echo '<!doctype html><html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html  
+
+-call the external ip outside the debian instance.
+
+
+#######################Transfer files to Windows VMs 
+-Create a hello text file and save on personal pc
+-Now using RDP file launch the window instance.
+-Copy the ""Hello.text"" file from your Personal PC and paste the Hello.txt in the Documents folder.
+
+
+
+##################Transfer files to Linux VMs 
+-Create a hello.txt file
+-Save it in your Personal pc
+-create an instance(linux) ::
+			Click on create instance button
+			Change the instanc name according to you--bootdisk {ubuntu as os} ---allow http 				traffic---create
+-click on "open in browser window"----AUTHORIZE
+-Click on the upload file option and select the hello.txt file from your personal pc.
+
+
+
+
+
+###################Back up a VM's persistent disk 
+-Create a VM instance
+-Click on Advanced option, we get option called Disks
+-select "Add New Disk", and create a new disk.
+
+
+
+
+####################Configure periodic backups with a snapshot schedule 
+-Select a instance and click on the bootdisk storage{details--storage--bootdisk}
+-click on the create snapshot option---create a snapshot {in source disk: select same as step1}
+-Now click on the create snapshot schedule option
+-You successfully a created a schedule snapshot
+
+
+
+#########################Restore a boot disk from a snapshot
+-Click on Snapshot option from the sidebar and select a snapshot from it.
+-if there is no snapshot then
+				click on the create snapshot option---create a snapshot
+-select the option create disk---create it
+-create a instance
+-In Disks option, select attach existing disk and select the disk you have created---create
+-After creating it, click VM instance on side bar, your session is restored here.
+
+
+
+
+
+#####################Restore a persistent disk from a snapshot
+-Select the Disk option from the sidebar and select any disk
+-if no disk available
+		 Create a VM instance
+		-Click on Advanced option, we get option called Disks
+		-select "Add New Disk", and create a new disk.
+-select the disk which is in use   {You will see that the disk is in use by ccassignment4}
+-go to vm instance {Now go to that ccassignment4 instance you will see there is Boot disk ccassignment4}
+-Delete the ccassignment4 instance.
+-Now create a disk to restore the session of ccassignment4----Select the Disk source_type :Snapshot, and then  select source_snapshot: snapshot1.
+-done
+
+
+
+
+
+
+
+
+
+###########################web feed
+
+-Search for times of india rss feeds
+-Copy the link from rss any2
+
+
+
+
+-save this php file in 
+<h3><b>Choose category: </b></h3>
+<form method="post" id="myform">
+<select name="rssurl" required>
+<option value="">Select</option>
+<option value="http://timesofindia.indiatimes.com/rssfeeds/-2128672765.cms">Science</option>
+<option value="https://timesofindia.indiatimes.com/rssfeeds/65857041.cms">Astrology</option>
+<option value="http://timesofindia.indiatimes.com/rssfeeds/66949542.cms">Tech</option>
+</select>
+<input type="submit" value="Load"/>
+</form>
+<?php
+if(isset($_POST['rssurl']))
+{
+echo '<h1> Search Result for RSS url: '.$_POST['rssurl'].'</h1>';
+$rssurl=$_POST['rssurl'];
+$rss=new DOMDocument();
+$rss->load($rssurl);
+$feed=array();
+foreach($rss->getElementsByTagName('item')as $node)
+{
+$item=array('title'=>$node->getElementsByTagName('title')->item(0)->nodeValue, 'desc'=>$node->getElementsByTagName('description')->item(0)->nodeValue,  'link'=>$node->getElementsByTagName('link')->item(0)->nodeValue, 'date'=>$node->getElementsByTagName('pubDate')->item(0)->nodeValue);
+array_push($feed,$item);
+}
+$limit=5;
+for($x=0;$x<$limit;$x++)
+{
+$title=str_replace('&','&amp;',$feed[$x]['title']);
+$link=$feed[$x]['link'];
+$description=$feed[$x]['desc'];
+$date=date('I F d,Y',strtotime($feed[$x]['date']));
+echo '<p> <strong><a href="'.$link.'" title="'.$title.'">'.$title.'</a></strong><br>';
+echo '<p>'.$description.' </p>';
+echo '<small><em>Posted on '.$date.'</em></small>';
+}
+}
+?>
