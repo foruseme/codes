@@ -1,0 +1,101 @@
+practical 5 WSN RIP and OSPF
+require things
+6 PC, 3 switch pt, 3 router pt
+
+connect all pc, switch and router through wired
+
+After connecting all the components. Now comes the config part
+
+pc configuration:
+for 192.168.10.0
+pc > config > fastetnernet > 192.168.10.2 
+pc > config > fastetnernet > 192.168.10.3
+
+for 192.168.11.0
+pc > config > fastetnernet > 192.168.11.2 
+pc > config > fastetnernet > 192.168.11.3
+
+for 192.168.12.0
+pc > config > fastetnernet > 192.168.12.2 
+pc > config > fastetnernet > 192.168.12.3
+
+router configration router to switch
+for 192.168.10.0
+router > config > fastetnernet 0/0 > 192.168.10.1
+
+for 192.168.11.0
+router > config > fastetnernet 0/0 > 192.168.11.1
+
+for 192.168.12.0
+router > config > fastetnernet 0/0 > 192.168.12.1
+
+router to router coniguration
+before configuring the router to router path check the router to router connection by hovering your upon the smaller triangle. According to that configure the router
+for 10.0.0.0
+1st router
+router > config > serial > 10.0.0.2
+2nd router
+router > config > serial > 10.0.0.3
+
+for 11.0.0.0
+1st router
+router > config > serial > 11.0.0.2
+2nd router
+router > config > serial > 11.0.0.3
+
+for 12.0.0.0
+1st router
+router > config > serial > 12.0.0.2
+2nd router
+router > config > serial > 12.0.0.3
+
+1) RIP METHOD
+For RIP method we will go to each router set RIP by adding every network gateways
+router > config > RIP 
+add all the network gateway
+10.0.0.0
+11.0.0.0
+12.0.0.0
+192.168.10.0
+192.168.11.0
+192.168.12.0
+
+After doing this, send packets from one pc to another pc
+do this one or more time for successful output
+
+2) OSPF method
+In rip method, you have gone to rip tab and add all the network gateway but for ospf you have to add network gateway through command line
+Router > CLI
+then enter this command:
+
+router ospf 1
+network 192.168.10.0 0.0.0.255 area 0
+network 192.168.11.0 0.0.0.255 area 0
+network 192.168.12.0 0.0.0.255 area 0
+network 10.0.0.0 0.255.255.255 area 0
+network 11.0.0.0 0.255.255.255 area 0
+network 12.0.0.0 0.255.255.255 area 0
+
+for better understanding what does above code means
+router ospf 1 => this code is used for starting ospf method
+network 192.168.11.0 0.0.0.255 area 0 => this code is used for creating connection: network = establish connection, 192.168.10.0 = network gateway
+0.0.0.255 = wildcard masking 
+wildcard masking is different from subnet
+in subnet for 192.168.10.0 the subnet will be 255.255.255.0 but for wildcard masking, it will be 0.0.0.255 which means the part in ip address which have 0 will became 255 and which have number 1-255 will became 0
+
+now here comes the state where the router will be not configure terminal state. So for this we will type this method.
+command:
+enable
+configure terminal
+router ospf 1
+network 192.168.10.0 0.0.0.255 area 0
+network 192.168.11.0 0.0.0.255 area 0
+network 192.168.12.0 0.0.0.255 area 0
+network 10.0.0.0 0.255.255.255 area 0
+network 11.0.0.0 0.255.255.255 area 0
+network 12.0.0.0 0.255.255.255 area 0
+
+that's all you will have the first two command then rest are same.
+
+After doing this, send packets from one pc to another pc
+do this one or more time for successful output
