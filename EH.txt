@@ -18,6 +18,7 @@ EH all steps
 
 ?????????????############################Use Cain and Abel for cracking Windows account password using Dictionary attack and to decode wireless network passwords
 
+tools---
 run cain and able as administrator---yes	
 Click on Cracker in top tab
 Click on HASH Calcuator on top.
@@ -36,8 +37,12 @@ if done click on exit
 #############################ARP Posioning
 cain and able software
 
+
+control pannel--- network and sharing centre ---- wifi---- adapter settings -----wifi---right click --- properties -----select ipv4----properties---- advanced---- dns---- click last checkbox---- ok
+
+cain and abel --- configure ---- select ip vala option --- okl
 Step 1 : Select sniffer on the top.
-Step 2 : Next to folder icon click on icon name start/stop sniffer. Select device and click on ok.
+Step 2 : Next to folder icon click on icon name start/stop sniffer ---- right click ---- ok----scan mac address--- Select device and click on ok.
 Step 3 : Click on  +  icon on the top. Click on ok.
 Step 4 : Shows the Connected host.
 Step 5 : Select Arp at bottom.
